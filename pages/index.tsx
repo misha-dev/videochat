@@ -1,11 +1,11 @@
 import Head from "next/head";
-export default function Main() {
+export default function MainPage() {
   return (
     <>
       <Head>
         <title>Video chat</title>
       </Head>
-      <div>Video chat</div>
+      <div>Home page</div>
     </>
   );
 }

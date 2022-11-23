@@ -8,6 +8,6 @@ module.exports = {
   // Prettify only Markdown and JSON files
   "**/*.(md|json)": (filenames) => `npx prettier --write ${filenames.join(" ")}`,
 
-  //Format scss files
+  //Format SCSS files
   "**/*.scss": (filenames) => `npm run stylelint ${filenames.join(" ")}`,
 };
