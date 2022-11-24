@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run --prefix client dev\" \"npm run --prefix server dev\"",
     "prepare": "husky install"
   },
   "repository": {
@@ -17,8 +18,8 @@
   "bugs": {
     "url": "https://github.com/misha-dev/videochat/issues"
   },
-  "homepage": "https://github.com/misha-dev/videochat#readme",
   "devDependencies": {
+    "concurrently": "^7.6.0",
     "husky": "^8.0.0"
   }
 }
