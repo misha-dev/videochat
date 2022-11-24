@@ -3,6 +3,7 @@ import Head from "next/head";
 import { Provider } from "react-redux";
 
 import store from "../src/store";
+
 import type { AppProps } from "next/app";
 import "../styles/global.scss";
 
