@@ -24,6 +24,11 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");
 });
 
+app.get("/set-name-cookie", (req: Request, res: Response) => {
+  const { name } = req.query;
+  res.setHeader("set-cookie", `name=${name}`);
+});
+
 server.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
 });
