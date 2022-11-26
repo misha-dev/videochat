@@ -1,3 +1,4 @@
+import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import express, { Express, Request, Response } from "express";
 import http from "http";
@@ -13,6 +14,8 @@ const io = new Server(server, {
   cors: { origin: "http://localhost:3000", methods: ["GET", "POST"] },
 });
 
+app.use(cookieParser());
+
 io.on("connection", (socket) => {
   console.log(socket.id);
 
@@ -26,7 +29,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.get("/set-name-cookie", (req: Request, res: Response) => {
   const { name } = req.query;
-  res.setHeader("set-cookie", `name=${name}`);
+  res.cookie("name", name);
 });
 
 server.listen(port, () => {
