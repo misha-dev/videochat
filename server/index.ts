@@ -24,12 +24,17 @@ io.on("connection", (socket) => {
   });
 });
 app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
+  res.send("Server running");
 });
 
 app.get("/set-name-cookie", (req: Request, res: Response) => {
   const { name } = req.query;
-  res.cookie("name", name);
+
+  res.cookie("name", name, {
+    maxAge: 86400000, // 1 day
+    httpOnly: true,
+  });
+  res.send("Cookie is set");
 });
 
 server.listen(port, () => {
