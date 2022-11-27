@@ -16,7 +16,7 @@ const Page404 = () => {
       <Link href={"/"} replace className={cl["more-link"]} passHref>
         <Button
           sx={{
-            color: "#973b76",
+            color: " #FFC0CB",
             fontSize: "1.7rem",
             fontWeight: "600",
             textDecoration: "underline",
