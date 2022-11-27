@@ -6,12 +6,13 @@ import { Server } from "socket.io";
 
 dotenv.config();
 const port = process.env.PORT || 3001;
+const clientURL = process.env.CLIENT_URL as string;
 
 const app: Express = express();
 const server = http.createServer(app);
 
 const io = new Server(server, {
-  cors: { origin: "http://localhost:3000", methods: ["GET", "POST"] },
+  cors: { origin: clientURL, methods: ["GET", "POST"] },
 });
 
 app.use(cookieParser());
