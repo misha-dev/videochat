@@ -35,7 +35,7 @@ app.get("/set-name-cookie", (req: Request, res: Response) => {
     maxAge: 86400000, // 1 day
     httpOnly: true,
   });
-  res.send("Cookie is set");
+  res.json({ name });
 });
 
 server.listen(port, () => {

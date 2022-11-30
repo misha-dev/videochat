@@ -10,7 +10,7 @@ const user = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUserName(state: UserType, action: PayloadAction<Omit<UserType, "socketId">>) {
+    setUserName(state: UserType, action: PayloadAction<UserType>) {
       state.name = action.payload.name;
     },
     logOut() {
