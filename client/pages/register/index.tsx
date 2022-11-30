@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 import InputNameForm from "../../src/Components/InputNameForm/InputNameForm";
@@ -18,12 +19,23 @@ const RegisterPage = () => {
       setName(value);
     }
   };
-  const submitName = async () => {
-    const response = await fetch(`${process.env.NEXT_SERVER_URL}` + "set-name-cookie");
+  const router = useRouter();
 
-    const data = await response.json();
-    dispatch(setUserName(data as UserType));
+  const refreshPage = () => {
+    router.replace(router.asPath, undefined, { scroll: false });
   };
+  const submitName = async () => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}` + `set-name-cookie?name=${name}`, { credentials: "include" });
+    if (response.ok) {
+      const data = await response.json();
+
+      dispatch(setUserName(data as UserType));
+      refreshPage();
+    } else {
+      console.log("Something went wrong!");
+    }
+  };
+
   return (
     <div className={cl.wrapper}>
       <InputNameForm onSubmit={submitName} placeholder="name" value={name} changeValue={changeName} />

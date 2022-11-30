@@ -1,4 +1,5 @@
 import cookieParser from "cookie-parser";
+import cors from "cors";
 import dotenv from "dotenv";
 import express, { Express, Request, Response } from "express";
 import http from "http";
@@ -16,6 +17,18 @@ const io = new Server(server, {
 });
 
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL as string,
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  })
+);
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", `${process.env.CLIENT_URL}`);
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 io.on("connection", (socket) => {
   console.log(socket.id);
