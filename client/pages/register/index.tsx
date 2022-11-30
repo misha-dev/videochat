@@ -10,6 +10,7 @@ import cl from "./register.module.scss";
 
 const RegisterPage = () => {
   const dispatch = useAppDispatch();
+  const [dataLoads, setDataLoads] = useState(false);
   const [name, setName] = useState("");
   const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(" ", "");
@@ -25,6 +26,7 @@ const RegisterPage = () => {
     router.replace(router.asPath, undefined, { scroll: false });
   };
   const submitName = async () => {
+    setDataLoads(true);
     const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}` + `set-name-cookie?name=${name}`, { credentials: "include" });
     if (response.ok) {
       const data = await response.json();
@@ -38,7 +40,7 @@ const RegisterPage = () => {
 
   return (
     <div className={cl.wrapper}>
-      <InputNameForm onSubmit={submitName} placeholder="name" value={name} changeValue={changeName} />
+      <InputNameForm dataLoads={dataLoads} onSubmit={submitName} placeholder="name" value={name} changeValue={changeName} />
     </div>
   );
 };
