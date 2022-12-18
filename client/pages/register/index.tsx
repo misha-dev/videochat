@@ -31,7 +31,7 @@ const RegisterPage = () => {
     if (response.ok) {
       const data = await response.json();
 
-      dispatch(setUserName(data as UserType));
+      dispatch(setUserName((data as UserType).name));
       refreshPage();
     } else {
       console.log("Something went wrong!");

@@ -30,8 +30,19 @@ app.use(function (req, res, next) {
   next();
 });
 
+type userOnline = {
+  userName: string;
+};
+
+const onlineUsers: userOnline[] = [];
+
 io.on("connection", (socket) => {
   console.log(socket.id);
+
+  socket.on("addUser", (username) => {
+    onlineUsers.some((user) => user.userName === username) && onlineUsers.push({ userName: username });
+    socket.broadcast.emit("newUser", username);
+  });
 
   socket.on("disconnect", () => {
     console.log(`disconnect ${socket.id}`);
@@ -46,7 +57,6 @@ app.get("/set-name-cookie", (req: Request, res: Response) => {
 
   res.cookie("name", name, {
     maxAge: 86400000, // 1 day
-    httpOnly: true,
   });
   res.json({ name });
 });

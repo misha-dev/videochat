@@ -10,8 +10,11 @@ const user = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUserName(state: UserType, action: PayloadAction<UserType>) {
-      state.name = action.payload.name;
+    setUserName(state, action: PayloadAction<string>) {
+      state.name = action.payload;
+    },
+    setSocketId(state, action: PayloadAction<string>) {
+      state.socketId = action.payload;
     },
     logOut() {
       return {} as UserType;
@@ -20,5 +23,5 @@ const user = createSlice({
 });
 
 export default user.reducer;
-export const { setUserName, logOut } = user.actions;
+export const { setUserName, setSocketId, logOut } = user.actions;
 export const selectUser = (state: RootState) => state.user;
