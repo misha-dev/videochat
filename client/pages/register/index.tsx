@@ -2,14 +2,10 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 import InputNameForm from "../../src/Components/InputNameForm/InputNameForm";
-import { useAppDispatch } from "../../src/store/hooks";
-import { setUserName } from "../../src/store/userSlice";
-import { UserType } from "../../src/types/userTypes";
 
 import cl from "./register.module.scss";
 
 const RegisterPage = () => {
-  const dispatch = useAppDispatch();
   const [dataLoads, setDataLoads] = useState(false);
   const [name, setName] = useState("");
   const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,9 +25,6 @@ const RegisterPage = () => {
     setDataLoads(true);
     const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}` + `set-name-cookie?name=${name}`, { credentials: "include" });
     if (response.ok) {
-      const data = await response.json();
-
-      dispatch(setUserName((data as UserType).name));
       refreshPage();
     } else {
       console.log("Something went wrong!");
